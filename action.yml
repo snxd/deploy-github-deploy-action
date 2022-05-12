@@ -20,7 +20,7 @@ inputs:
   console_version:
     description: Version of Solsta Console Tools to use
     required: true
-    default: "3.7"
+    default: "6.1.1.12"
   console_path:
     description: Path to install Solsta Console Tools
     required: true
