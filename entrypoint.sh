@@ -11,12 +11,12 @@ if [[ -z "$INPUT_CONSOLE_VERSION" ]]; then
   exit 1
 fi
 
-if [[ -z "$INPUT_CLIENT_ID" ]]; then
+if [[ -z "$SNXD_CLIENT_ID" ]]; then
   echo "Missing CLIENT ID in the action"
   exit 1
 fi
 
-if [[ -z "$INPUT_CLIENT_SECRET" ]]; then
+if [[ -z "$SNXD_CLIENT_SECRET" ]]; then
   echo "Missing CLIENT SECRET in the action"
   exit 1
 fi
@@ -41,7 +41,7 @@ if [ -d "solsta_work" ]; then rm -Rf solsta_work; fi
 # Download the latest deploy scripts
 git clone --branch 3.7 https://gitlab.com/snxd/deploy.git solsta_work
 # Generate console credential file from env vars
-echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$INPUT_CLIENT_ID\",\"clientSecret\":\"$INPUT_CLIENT_SECRET\",\"grant\":\"clientCredentials\"}}"  > solsta_work/client_credentials.json
+echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$SNXD_CLIENT_ID\",\"clientSecret\":\"$SNXD_CLIENT_SECRET\",\"grant\":\"clientCredentials\"}}"  > solsta_work/client_credentials.json
 cd solsta_work
 # Install any missing deploy script dependencies
 pip install -r requirements.txt
