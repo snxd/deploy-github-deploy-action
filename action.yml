@@ -1,0 +1,69 @@
+name: Solsta Deployment Actions
+description: Deploy or Promote a release, or Cleanup a repository
+inputs:
+  action:
+    description: Action to perform: deploy, promote, or cleanup
+    required: true
+    default: "deploy"
+  working_directory:
+    description: Relative path to folder containing deployable artifacts (deploy action only) 
+    required: false
+    default: ""
+  client_id:
+    description: Client ID to authenticate usage of Solid State Networks console tools
+    required: true
+    default: ""
+  client_secret:
+    description: Secret Key to authenticate usage of Solid State Networks console tools
+    required: true
+    default: ""
+  console_version:
+    description: Version of Solsta Console Tools to use
+    required: true
+    default: "3.7"
+  console_path:
+    description: Path to install Solsta Console Tools
+    required: true
+    default: "/home/solsta/tools"
+  target_product:
+    description: Target product for deployment/promote (case-sensitive)
+    required: true
+  target_environment:
+    description: Target environment for deployment/promote (case-sensitive)
+    required: false
+  target_repository:
+    description: Target repository for deployment/promote (case-sensitive)
+    required: false
+  source_product:
+    description: Source product for promote action only (case-sensitive)
+    required: false
+  source_environment:
+    description: Source environment for promote action only (case-sensitive)
+    required: false
+  source_repository:
+    description: Source repository for promote action only (case-sensitive)
+    required: false
+
+outputs:
+  result:
+    description: The state of the action, if processes completed successfully
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.action }}
+    - ${{ inputs.client_id }}
+    - ${{ inputs.client_secret }}
+    - ${{ inputs.working_directory }}
+    - ${{ inputs.console_version }}
+    - ${{ inputs.console_path }}
+    - ${{ inputs.target_product }}
+    - ${{ inputs.target_environment }}
+    - ${{ inputs.target_repository }}
+    - ${{ inputs.source_product }}
+    - ${{ inputs.source_environment }}
+    - ${{ inputs.source_repository }}
+branding:
+  icon: "download-cloud"
+  color: "yellow"
