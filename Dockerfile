@@ -6,5 +6,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY . /run
+RUN chmod +x /run/entrypoint.sh
 
 ENTRYPOINT [ "/run/entrypoint.sh" ]
