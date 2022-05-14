@@ -48,4 +48,5 @@ pip install -r requirements.txt
 # Download the latest SSN Console Tools if necessary
 if [ ! -d "solsta_console" ]; then python3 direct_get.py --overwrite --version="$INPUT_CONSOLE_VERSION" --target_directory=./solsta_console/ --console_credentials=client_credentials.json ; fi
 # Run the script that creates a new release and deploys it
-python3 release_deploy.py --debug --console_credentials=client_credentials.json --console_directory=./solsta_console/console/ --product_name="$INPUT_TARGET_PRODUCT" --env_name="$INPUT_TARGET_ENVIRONMENT" --repository_name="$INPUT_TARGET_REPOSITORY" --source="$INPUT_WORKING_DIRECTORY"
+cd ..
+python3 solsta_work/release_deploy.py --debug --console_credentials=client_credentials.json --console_directory=./solsta_work/solsta_console/console/ --product_name="$INPUT_TARGET_PRODUCT" --env_name="$INPUT_TARGET_ENVIRONMENT" --repository_name="$INPUT_TARGET_REPOSITORY" --source="$INPUT_WORKING_DIRECTORY"
