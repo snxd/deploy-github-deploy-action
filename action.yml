@@ -15,17 +15,17 @@ inputs:
     default: "6.1.1.12"
   working_directory:
     description: Relative path to folder containing deployable artifacts
-    required: false
+    required: true
     default: ""
   target_product:
     description: Target product for deployment (case-sensitive)
     required: true
   target_environment:
     description: Target environment for deployment (case-sensitive)
-    required: false
+    required: true
   target_repository:
     description: Target repository for deployment (case-sensitive)
-    required: false
+    required: true
 
 outputs:
   result:
