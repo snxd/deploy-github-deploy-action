@@ -13,6 +13,10 @@ inputs:
     description: Version of Solsta Console Tools to use
     required: true
     default: "6.1.1.12"
+  scripts_version:
+    description: Version of Solsta Deploy Scripts to use
+    required: true
+    default: "3.7.16"
   working_directory:
     description: Relative path to folder containing deployable artifacts
     required: true
@@ -39,6 +43,7 @@ runs:
     - ${{ inputs.solsta_client_secret }}
     - ${{ inputs.working_directory }}
     - ${{ inputs.console_version }}
+    - ${{ inputs.scripts_version }}
     - ${{ inputs.target_product }}
     - ${{ inputs.target_environment }}
     - ${{ inputs.target_repository }}

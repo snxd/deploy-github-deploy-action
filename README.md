@@ -7,6 +7,7 @@ This project is a GitHub Action that uses Solid State Networks tools and service
 * **solsta_client_id:**     Client ID to authenticate usage of Solid State Networks console tools
 * **solsta_client_secret:** Secret Key to authenticate usage of Solid State Networks console tools
 * **console_version:**      Version of Solsta Console Tools to use
+* **scripts_version:**      Version of Solsta Deploy Scripts to use
 * **working_directory:**    Relative path to folder containing deployable artifacts
 * **target_product:**       Target product for deployment (case-sensitive)
 * **target_environment:**   Target environment for deployment (case-sensitive)
@@ -23,6 +24,7 @@ Here is an example YAML Fragment in the steps section of a build:
       with:
         working_directory: 'bin/'
         console_version: '6.1.1.12'
+        scripts_version: '3.7.16'
         target_product: 'Emutil'
         target_environment: 'Java'
         target_repository: 'Bin'
