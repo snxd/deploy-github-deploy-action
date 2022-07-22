@@ -11,6 +11,11 @@ if [[ -z "$INPUT_CONSOLE_VERSION" ]]; then
   exit 1
 fi
 
+if [[ -z "$INPUT_SCRIPTS_VERSION" ]]; then
+  echo "Missing SCRIPTS VERSION in the action"
+  exit 1
+fi
+
 if [[ -z "$INPUT_SOLSTA_CLIENT_ID" ]]; then
   echo "Missing SOLSTA CLIENT ID in the action"
   exit 1
@@ -39,10 +44,13 @@ cd /github/workspace
 # Remove the old deploy script directory
 if [ -d "solsta_work" ]; then rm -Rf solsta_work; fi
 # Download the latest deploy scripts
-git clone --branch 3.7 https://gitlab.com/snxd/deploy.git solsta_work
-# Generate console credential file from env vars
-echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$INPUT_SOLSTA_CLIENT_ID\",\"clientSecret\":\"$INPUT_SOLSTA_CLIENT_SECRET\",\"grant\":\"clientCredentials\"}}"  > solsta_work/client_credentials.json
+mkdir solsta_work
+# Download the latest deploy scripts
 cd solsta_work
+wget https://releases.snxd.com/deploy-scripts-$INPUT_SCRIPTS_VERSION.zip
+unzip deploy-scripts-$INPUT_SCRIPTS_VERSION.zip
+# Generate console credential file from env vars
+echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$INPUT_SOLSTA_CLIENT_ID\",\"clientSecret\":\"$INPUT_SOLSTA_CLIENT_SECRET\",\"grant\":\"clientCredentials\"}}"  > client_credentials.json
 # Install any missing deploy script dependencies
 pip install -r requirements.txt
 # Download the latest SSN Console Tools if necessary
