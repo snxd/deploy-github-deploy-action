@@ -17,6 +17,10 @@ inputs:
     description: Version of Solsta Deploy Scripts to use
     required: true
     default: "3.7.16"
+  release_version:
+    description: An environment variable or build parameter to use as a version within Solsta (optional)
+    required: false
+    default: ""
   working_directory:
     description: Relative path to folder containing deployable artifacts
     required: true
@@ -41,6 +45,7 @@ runs:
   args:
     - ${{ inputs.solsta_client_id }}
     - ${{ inputs.solsta_client_secret }}
+    - ${{ inputs.release_version }}
     - ${{ inputs.working_directory }}
     - ${{ inputs.console_version }}
     - ${{ inputs.scripts_version }}
