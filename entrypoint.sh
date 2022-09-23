@@ -50,11 +50,11 @@ cd solsta_work
 wget https://releases.snxd.com/deploy-scripts-$INPUT_SCRIPTS_VERSION.zip
 unzip deploy-scripts-$INPUT_SCRIPTS_VERSION.zip
 # Generate console credential file from env vars
-echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$INPUT_SOLSTA_CLIENT_ID\",\"clientSecret\":\"$INPUT_SOLSTA_CLIENT_SECRET\",\"grant\":\"clientCredentials\"}}"  > client_credentials.json
+echo "{\"consoleCredentials\":{\"audience\":\"https://axis.snxd.com/\",\"clientId\":\"$INPUT_SOLSTA_CLIENT_ID\",\"clientSecret\":\"$INPUT_SOLSTA_CLIENT_SECRET\",\"grant\":\"clientCredentials\",\"scope\":\"d4tv1\"}}"  > client_credentials.json
 # Install any missing deploy script dependencies
 pip install -r requirements.txt
 # Download the latest SSN Console Tools if necessary
-if [ ! -d "solsta_console" ]; then python3 direct_get.py --overwrite --version="$INPUT_CONSOLE_VERSION" --target_directory=./solsta_console/ --console_credentials=client_credentials.json ; fi
+if [ ! -d "solsta_console" ]; then python3 direct_get.py --overwrite --version="$INPUT_CONSOLE_VERSION" --target_directory=./solsta_console/ --console_credentials=client_credentials.json --component=console ; fi
 # Run the script that creates a new release and deploys it
 solsta_extra_args=""
 if [ ! "$INPUT_RELEASE_VERSION" = "" ]; then solsta_extra_args="--version=\"$INPUT_RELEASE_VERSION\"" ; fi ;
