@@ -16,7 +16,7 @@ inputs:
   scripts_version:
     description: Version of Solsta Deploy Scripts to use
     required: true
-    default: "3.7.16"
+    default: "3.7.18"
   release_version:
     description: An environment variable or build parameter to use as a version within Solsta (optional)
     required: false
