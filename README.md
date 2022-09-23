@@ -25,7 +25,7 @@ Here is an example YAML Fragment in the steps section of a build:
       with:
         working_directory: 'bin/'
         console_version: '6.1.1.12'
-        scripts_version: '3.7.16'
+        scripts_version: '3.7.18'
         release_version: '1.0'
         target_product: 'Emutil'
         target_environment: 'Java'
