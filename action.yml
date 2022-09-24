@@ -12,7 +12,7 @@ inputs:
   console_version:
     description: Version of Solsta Console Tools to use
     required: true
-    default: "6.1.1.12"
+    default: "6.1.2.51"
   scripts_version:
     description: Version of Solsta Deploy Scripts to use
     required: true
