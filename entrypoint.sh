@@ -57,6 +57,6 @@ pip install -r requirements.txt
 if [ ! -d "solsta_console" ]; then python3 direct_get.py --overwrite --version="$INPUT_CONSOLE_VERSION" --target_directory=./solsta_console/ --console_credentials=client_credentials.json --component=console ; fi
 # Run the script that creates a new release and deploys it
 solsta_extra_args=""
-if [ ! "$INPUT_RELEASE_VERSION" = "" ]; then solsta_extra_args="--version=\"$INPUT_RELEASE_VERSION\"" ; fi ;
+if [ ! "$INPUT_RELEASE_VERSION" = "" ]; then solsta_extra_args+=" --version=$INPUT_RELEASE_VERSION" ; fi ;
 cd ..
 python3 solsta_work/release_deploy.py --debug --console_credentials=solsta_work/client_credentials.json --console_directory=./solsta_work/solsta_console/console/ --product_name="$INPUT_TARGET_PRODUCT" --env_name="$INPUT_TARGET_ENVIRONMENT" --repository_name="$INPUT_TARGET_REPOSITORY" --source="$INPUT_WORKING_DIRECTORY" $solsta_extra_args
