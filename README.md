@@ -20,7 +20,7 @@ Here is an example YAML Fragment in the steps section of a build:
 
 ```yaml
     steps:
-    - name: Deploy Build Assets from bin/ directory:
+    - name: Deploy Build Assets from bin/ directory
       uses: snxd/deploy-github-deploy-action@main
       with:
         working_directory: 'bin/'
