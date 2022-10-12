@@ -21,7 +21,7 @@ Here is an example YAML Fragment in the steps section of a build:
 ```yaml
     steps:
     - name: Deploy Build Assets from bin/ directory
-      uses: snxd/deploy-github-deploy-action@main
+      uses: snxd/deploy-github-deploy-action@v1
       with:
         working_directory: 'bin/'
         console_version: '6.1.2.51'
