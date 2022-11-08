@@ -16,7 +16,7 @@ This project is a GitHub Action that uses Solid State Networks tools and service
 
 ## Using
 
-Here is an example YAML Fragment in the steps section of a build:
+Here is an example YAML Fragment in the steps section of a build
 
 ```yaml
     steps:

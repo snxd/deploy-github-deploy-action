@@ -40,18 +40,26 @@ outputs:
     description: The state of the action, if processes completed successfully
 
 runs:
-  using: docker
-  image: Dockerfile
-  args:
-    - ${{ inputs.solsta_client_id }}
-    - ${{ inputs.solsta_client_secret }}
-    - ${{ inputs.release_version }}
-    - ${{ inputs.working_directory }}
-    - ${{ inputs.console_version }}
-    - ${{ inputs.scripts_version }}
-    - ${{ inputs.target_product }}
-    - ${{ inputs.target_environment }}
-    - ${{ inputs.target_repository }}
+  using: 'composite'
+  steps:
+  - name: Solsta setup
+    uses: snxd/deploy-github-setup-action@v1
+    with:
+      solsta_client_id: ${{ inputs.solsta_client_id }}
+      solsta_client_secret: ${{ inputs.solsta_client_secret }}
+      console_version: ${{ inputs.console_version }}
+      scripts_version: ${{ inputs.scripts_version }}
+
+  - name: Do Deploy
+    shell: bash
+    run: |
+          # Run the script that creates a new release and deploys it
+          solsta_extra_args=""
+          if [ ! "${{ inputs.release_version }}" = "" ]; then
+            solsta_extra_args="--version=${{ inputs.release_version }}"
+          fi
+          python3 solsta_work/release_deploy.py --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
+ 
 branding:
   icon: "download-cloud"
   color: "yellow"
