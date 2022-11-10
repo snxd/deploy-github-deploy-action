@@ -2,6 +2,8 @@
 
 This project is a GitHub Action that uses Solid State Networks tools and services to deploy assets from a build to a CDN for downloading.  
 
+The action is compatible with Windows, Linux, and OSX runners.  Windows self-hosted runners require git-bash (https://git-scm.com/) in the %PATH%.
+
 ## Variables
 
 * **solsta_client_id:**     Client ID to authenticate usage of Solid State Networks console tools
