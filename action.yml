@@ -43,7 +43,7 @@ runs:
   using: 'composite'
   steps:
   - name: Solsta setup
-    uses: snxd/deploy-github-setup-action@v1
+    uses: snxd/deploy-github-setup-action@v2
     with:
       solsta_client_id: ${{ inputs.solsta_client_id }}
       solsta_client_secret: ${{ inputs.solsta_client_secret }}
@@ -58,7 +58,7 @@ runs:
           if [ ! "${{ inputs.release_version }}" = "" ]; then
             solsta_extra_args="--version=${{ inputs.release_version }}"
           fi
-          python3 solsta_work/release_deploy.py --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
+          python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
  
 branding:
   icon: "download-cloud"
