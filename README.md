@@ -23,11 +23,11 @@ Here is an example YAML Fragment in the steps section of a build
 ```yaml
     steps:
     - name: Deploy Build Assets from bin/ directory
-      uses: snxd/deploy-github-deploy-action@v1
+      uses: snxd/deploy-github-deploy-action@v2
       with:
         working_directory: 'bin/'
         console_version: '6.1.2.59'
-        scripts_version: '3.7.25'
+        scripts_version: '3.7.24'
         release_version: '1.0'
         target_product: 'Emutil'
         target_environment: 'Java'
