@@ -26,8 +26,8 @@ Here is an example YAML Fragment in the steps section of a build
       uses: snxd/deploy-github-deploy-action@v2
       with:
         working_directory: 'bin/'
-        console_version: '6.1.2.59'
-        scripts_version: '3.7.24'
+        console_version: '6.1.2.84'
+        scripts_version: '3.7.30'
         release_version: '1.0'
         target_product: 'Emutil'
         target_environment: 'Java'
