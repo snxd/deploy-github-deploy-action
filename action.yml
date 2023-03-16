@@ -34,6 +34,9 @@ inputs:
   target_repository:
     description: Target repository for deployment (case-sensitive)
     required: true
+  hidden_files:
+    description: Hidden file relative path list. Format is ("path1" "path2" etc...)
+    required: false
 
 outputs:
   result:
@@ -56,8 +59,15 @@ runs:
           # Run the script that creates a new release and deploys it
           solsta_extra_args=""
           if [ ! "${{ inputs.release_version }}" = "" ]; then
-            solsta_extra_args="--version=${{ inputs.release_version }}"
+            solsta_extra_args+="--version=${{ inputs.release_version }}  "
           fi
+          if [ ! "${{ inputs.hidden_files }}" = "" ]; then
+            VAL=${{ inputs.hidden_files }}
+            for i in ${VAL[@]} ; do
+              solsta_extra_args+=" --hidden_file=$i "
+            done
+          fi
+          echo $solsta_extra_args
           python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
  
 branding:
