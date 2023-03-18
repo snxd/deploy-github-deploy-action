@@ -16,6 +16,8 @@ The action is compatible with Windows, Linux, and OSX runners.  Windows self-hos
 * **target_environment:**   Target environment for deployment (case-sensitive)
 * **target_repository:**    Target repository for deployment (case-sensitive)
 * **hidden_files:**         List of hidden files in format '( "path1" "path2" etc.. )'
+* **sync_attributes:**      Set to "true" to sync attributes from source files.
+* **executable_files:**     List of executable files in format '( "path1" "path2" etc.. )'
 
 ## Using
 
@@ -36,6 +38,8 @@ Here is an example YAML Fragment in the steps section of a build
         target_environment: 'Java'
         target_repository: 'Bin'
         hidden_files: '( "bin/D64Search.jar" "bin/D64Mod.jar" )'
+        sync_attributes: 'False'
+        executable_files: '( "bin/D64Search.jar" "bin/D64Mod.jar" )'
 
 ```
 
