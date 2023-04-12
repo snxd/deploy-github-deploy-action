@@ -1,5 +1,5 @@
 name: Solsta Deployment Action
-description: Deploy a release
+description: Deploy a release 
 inputs:
   solsta_client_id:
     description: Client ID to authenticate usage of Solid State Networks console tools
@@ -41,8 +41,18 @@ inputs:
     description: Set to 'true' to sync attributes from source files. 
     default: "false"
     required: false
+  sync_timestamps:
+    description: Set to 'true' to sync timestamps from source files. 
+    default: "false"
+    required: false
   executable_files:
     description: List of executable files in format '( "path1" "path2" etc.. )'
+    required: false
+  included_files:
+    description: List of include file path masks, format is 'path1/;/*/path/*mask'
+    required: false
+  excluded_files:
+    description: List of exclude file path masks, format is 'path1/;/*/path/*mask'
     required: false
 
 outputs:
@@ -78,13 +88,23 @@ runs:
           if [ "$sync_var" = "true" ]; then
               solsta_extra_args+=" --sync_attributes "
           fi
+          sync_var="$(tr [A-Z] [a-z] <<< "${{ inputs.sync_timestamps }}")"
+          if [ "$sync_var" = "true" ]; then
+              solsta_extra_args+=" --sync_timestamps "
+          fi
           if [ ! "${{ inputs.executable_files }}" = "" ]; then
             VAL=${{ inputs.executable_files }}
             for i in ${VAL[@]} ; do
               solsta_extra_args+=" --executable_files=$i "
             done
           fi
-          python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
+          if [ ! "${{ inputs.included_files }}" = "" ]; then
+            solsta_extra_args+="--include=\"${{ inputs.included_files }}\" "
+          fi
+          if [ ! "${{ inputs.excluded_files }}" = "" ]; then
+            solsta_extra_args+="--exclude=\"${{ inputs.excluded_files }}\" "
+          fi
+          python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --process_default=API --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
  
 branding:
   icon: "download-cloud"
