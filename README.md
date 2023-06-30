@@ -31,8 +31,8 @@ Here is an example YAML Fragment in the steps section of a build
     - name: Deploy Build Assets from bin/ directory
       uses: snxd/deploy-github-deploy-action@v2
       with:
-        solsta_client_id:  ${{ secrets.SNXD_CLIENT_ID }}
-        solsta_client_secret:  ${{ secrets.SNXD_CLIENT_SECRET }}
+        solsta_client_id:  ${{ secrets.SOLSTA_CLIENT_ID }}
+        solsta_client_secret:  ${{ secrets.SOLSTA_CLIENT_SECRET }}
         working_directory: 'bin/'
         console_version: '6.1.2.84'
         scripts_version: '3.7.30'
