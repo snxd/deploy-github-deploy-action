@@ -104,7 +104,7 @@ runs:
           if [ ! "${{ inputs.excluded_files }}" = "" ]; then
             solsta_extra_args+="--exclude=\"${{ inputs.excluded_files }}\" "
           fi
-          python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --process_default=API --product_name="${{ inputs.target_product }}" --env_name="${{ inputs.target_environment }}" --repository_name="${{ inputs.target_repository }}" --source="${{ inputs.working_directory }}" $solsta_extra_args  
+          eval "python solsta_work/release_deploy.py --autocreate --debug --console_credentials=solsta_work/client_credentials.json --console_directory=solsta_work/solsta_console/${{ inputs.console_version }}/console/ --process_default=API --product_name=\"${{ inputs.target_product }}\" --env_name=\"${{ inputs.target_environment }}\" --repository_name=\"${{ inputs.target_repository }}\" --source=\"${{ inputs.working_directory }}\" $solsta_extra_args"  
  
 branding:
   icon: "download-cloud"
