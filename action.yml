@@ -63,7 +63,7 @@ runs:
   using: 'composite'
   steps:
   - name: Solsta setup
-    uses: snxd/deploy-github-setup-action@v2
+    uses: snxd/deploy-github-setup-action@v3
     with:
       solsta_client_id: ${{ inputs.solsta_client_id }}
       solsta_client_secret: ${{ inputs.solsta_client_secret }}
