@@ -12,11 +12,11 @@ inputs:
   console_version:
     description: Version of Solsta Console Tools to use
     required: true
-    default: "6.1.2.84"
+    default: "7.2.49"
   scripts_version:
     description: Version of Solsta Deploy Scripts to use
     required: true
-    default: "3.7.30"
+    default: "3.10.0"
   release_version:
     description: An environment variable or build parameter to use as a version within Solsta (optional)
     required: false
@@ -54,6 +54,9 @@ inputs:
   excluded_files:
     description: List of exclude file path masks, format is 'path1/;/*/path/*mask'
     required: false
+  notes_location:
+    description: Optional URL for release notes.
+    required: false
 
 outputs:
   result:
@@ -63,7 +66,7 @@ runs:
   using: 'composite'
   steps:
   - name: Solsta setup
-    uses: snxd/deploy-github-setup-action@v3
+    uses: snxd/deploy-github-setup-action@v4
     with:
       solsta_client_id: ${{ inputs.solsta_client_id }}
       solsta_client_secret: ${{ inputs.solsta_client_secret }}
@@ -77,6 +80,9 @@ runs:
           solsta_extra_args=""
           if [ ! "${{ inputs.release_version }}" = "" ]; then
             solsta_extra_args+="--version=${{ inputs.release_version }}  "
+          fi
+          if [ ! "${{ inputs.notes_location }}" = "" ]; then
+            solsta_extra_args+="--notes_location=${{ inputs.notes_location }}  "
           fi
           if [ ! "${{ inputs.hidden_files }}" = "" ]; then
             VAL=${{ inputs.hidden_files }}
