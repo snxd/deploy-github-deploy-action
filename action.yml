@@ -16,7 +16,7 @@ inputs:
   scripts_version:
     description: Version of Solsta Deploy Scripts to use
     required: true
-    default: "3.10.0"
+    default: "3.11.0"
   release_version:
     description: An environment variable or build parameter to use as a version within Solsta (optional)
     required: false
@@ -66,7 +66,7 @@ runs:
   using: 'composite'
   steps:
   - name: Solsta setup
-    uses: snxd/deploy-github-setup-action@v4
+    uses: snxd/deploy-github-setup-action@v5
     with:
       solsta_client_id: ${{ inputs.solsta_client_id }}
       solsta_client_secret: ${{ inputs.solsta_client_secret }}

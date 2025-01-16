@@ -30,13 +30,13 @@ Here is an example YAML Fragment in the steps section of a build
 ```yaml
     steps:
     - name: Deploy Build Assets from bin/ directory
-      uses: snxd/deploy-github-deploy-action@v4
+      uses: snxd/deploy-github-deploy-action@v5
       with:
         solsta_client_id:  ${{ secrets.SOLSTA_CLIENT_ID }}
         solsta_client_secret:  ${{ secrets.SOLSTA_CLIENT_SECRET }}
         working_directory: 'bin/'
         console_version: '7.2.49'
-        scripts_version: '3.10.0'
+        scripts_version: '3.11.0'
         release_version: '1.0'
         notes_location: 'https://release.notes.com/notes1.0.html'
         target_product: 'Emutil'
