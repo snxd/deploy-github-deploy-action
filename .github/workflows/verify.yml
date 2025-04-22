@@ -1,0 +1,37 @@
+name: Verify
+on: [pull_request]
+env:
+  TERM: xterm-256color
+jobs:
+  verify-commits:
+    name: Check Commit Signatures
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check signatures
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          COMMITS=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits \
+            --jq '.[].sha') || {
+            echo "::error::Failed to fetch commits from GitHub"
+            exit 1
+          }
+
+          if [ -z "$COMMITS" ]; then
+            echo "::error::Unexpected empty commit list"
+            exit 1
+          fi
+
+          for sha in $COMMITS; do
+            echo "Checking commit $sha"
+            VERIFIED=$(gh api repos/${{ github.repository }}/commits/$sha --jq '.commit.verification.verified')
+            if [ "$VERIFIED" != "true" ]; then
+              echo "::error::Commit $sha is not verified"
+              exit 1
+            fi
+          done
