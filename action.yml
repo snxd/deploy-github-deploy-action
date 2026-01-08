@@ -2,11 +2,11 @@ name: Solsta Deployment Action
 description: Deploy a release 
 inputs:
   solsta_client_id:
-    description: Client ID to authenticate usage of Solid State Networks console tools
+    description: Client ID to authenticate usage of Solsta console tools
     required: true
     default: ""
   solsta_client_secret:
-    description: Secret Key to authenticate usage of Solid State Networks console tools
+    description: Secret Key to authenticate usage of Solsta console tools
     required: true
     default: ""
   console_version:
